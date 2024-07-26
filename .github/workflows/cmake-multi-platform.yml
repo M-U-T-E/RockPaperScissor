@@ -24,10 +24,8 @@ jobs:
           .\install.ps1 -RunAsAdmin
           scoop update
           scoop bucket add extras
-          scoop bucket add main
           scoop install mingw
           scoop install nsis
-          scoop install main/curl
           
       - name: Setup NSIS PATH_strlen special patch
         run: |
