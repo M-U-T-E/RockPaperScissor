@@ -25,7 +25,9 @@ jobs:
           
       - name: Create installer
         uses: repolevedavaj/install-nsis@v1.0.2
-        
+        with:
+          nsis-version: 3.08
+          
       - name: configure
         run: |
           cmake -S . -B build  -G "Visual Studio 17 2022"  -T host=x86 -A x64
