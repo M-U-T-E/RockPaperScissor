@@ -26,10 +26,12 @@ jobs:
           scoop bucket add extras
       
       - name: Setup MinGW
-        run: scoop install mingw
+        run: |
+          scoop install mingw
         
       - name: Install NSIS
-        run: scoop install nsis
+        run: | 
+          scoop install nsis
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
