@@ -1,0 +1,49 @@
+name: unbuntu build
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        platform:
+          - amd64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+          
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.22'
+        
+      - name: configure
+        run: |
+          cmake -S . -B build  -G "Ninja"
+          
+      - name: build
+        run: |
+          cmake --build build --config Release
+          cd build
+          cpack -C Release
+          cd ..
+
+      - name: report build dir
+        run: |
+          cd build
+          ls
+          cd ..
+      - name: Upload windows build to GH release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}     
+          file: build/rpsg-${{ github.ref_name }}-amd64.deb
+          asset_name: RockPaperScissor-${{ github.ref_name }}-${{ matrix.os }}.deb
+          prerelease: true
