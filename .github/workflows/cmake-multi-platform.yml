@@ -34,7 +34,7 @@ jobs:
           mkdir nsisTemp
           cd nsisTemp
           curl -LO https://unlimited.dl.sourceforge.net/project/nsis/NSIS%203/3.10/nsis-3.10-strlen_8192.zip?viasf=1 nsis-3.10-strlen.zip
-          Expand-Archive -Path "nsis-strlen.zip" -DestinationPath "nsis-strlen"
+          Expand-Archive -Path "nsis-3.10-strlen.zip" -DestinationPath "nsis-strlen"
           Copy-Item -Path nsis-strlen/* -Destination ~\scoop\apps\nsis\current -Force
           cd ..
             
