@@ -18,19 +18,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: install scoop
+      - name: Setup MinGW and NSIS
         run: |
           iwr -useb get.scoop.sh -outfile 'install.ps1'
           .\install.ps1 -RunAsAdmin
           scoop update
           scoop bucket add extras
-      
-      - name: Setup MinGW
-        run: |
           scoop install mingw
-        
-      - name: Install NSIS
-        run: | 
           scoop install nsis
           
       - name: Setup CMake
