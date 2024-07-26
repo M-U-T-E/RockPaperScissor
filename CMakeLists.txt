@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
-set(ROCKPAPERSCISSOR "rockpaperscissor")
+set(ROCKPAPERSCISSOR "rpsg")
 set(ROCKPAPERSCISSOR_SOURCES "main.cpp")
 
 set(CONFIG_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
