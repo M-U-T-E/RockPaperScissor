@@ -39,7 +39,9 @@ jobs:
       - name: build
         run: |
           cmake --build build --config Release
-          cpack build
+          cd build
+          cpack -C Release
+          cd ..
           
       - name: Upload windows build to GH release
         uses: svenstaro/upload-release-action@v2
