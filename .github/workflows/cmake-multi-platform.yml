@@ -17,30 +17,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup MinGW
+        
+      - name: install scoop
         run: |
           iwr -useb get.scoop.sh -outfile 'install.ps1'
           .\install.ps1 -RunAsAdmin
           scoop update
           scoop bucket add extras
-          scoop install mingw
+      
+      - name: Setup MinGW
+        run: scoop install mingw
         
+      - name: Install NSIS
+        run: scoop install nsis
+          
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: '3.22'
-          
-      - name: Install NSIS
-        run: |
-          iwr -useb get.scoop.sh -outfile 'install.ps1'
-          .\install.ps1 -RunAsAdmin
-          scoop update
-          scoop bucket add extras
-          scoop install nsis
-          
-      - name: Print NSIS version
-        run: makensis -VERSION
         
       - name: configure
         run: |
