@@ -44,6 +44,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}     
-          file: build/rpsg-${{ github.ref_name }}-amd64.deb
+          file: build/rpsg_${{ github.ref_name }}_amd64.deb
           asset_name: RockPaperScissor-${{ github.ref_name }}-${{ matrix.os }}.deb
           prerelease: true
