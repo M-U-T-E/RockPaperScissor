@@ -30,7 +30,7 @@ jobs:
       - name: Setup NSIS PATH_strlen special patch
         run: |
           Expand-Archive -Path "nsis-3.10-strlen_8192.zip" -DestinationPath "nsis-strlen"
-          Copy-Item -Path nsis-strlen/* -Destination ~\scoop\apps\nsis\3.10 -Force
+          Copy-Item -Path nsis-strlen/* -Destination ~\scoop\apps\nsis\current -Force
             
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
