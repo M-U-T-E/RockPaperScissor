@@ -39,7 +39,7 @@ jobs:
           cd build
           ls
           cd ..
-      - name: Upload windows build to GH release
+      - name: Upload unbuntu build to GH release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}

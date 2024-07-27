@@ -5,28 +5,10 @@
 #include <array>
 #include <algorithm>
 #include <ctime>
-#ifdef _WIN32
-    #define WINDOWS32
+#if defined(_WIN32) || defined(_WIN64)
+    #define WINDOWS
     #include <windows.h>
-#elif _WIN64
-    #define WINDOWS64
-    #include <windows.h>
-#elifdef __linux__
-    #define UNIX_LIKE
-    #include <unistd.h>
-#elifdef  __unix
-    #define UNIX_LIKE
-    #include <unistd.h>
-#elifdef __unix__    
-    #define UNIX_LIKE
-    #include <unistd.h>
-#elifdef  __APPLE__
-    #define UNIX_LIKE
-    #include <unistd.h>
-#elifdef __MACH__
-    #define UNIX_LIKE
-    #include <unistd.h>
-#elifdef __FreeBSD__
+#elif defined(__linux__) || defined(__unix) || defined(__unix__)  || defined(__APPLE__) || defined(__MACH__) || defined(__FreeBSD__)
     #define UNIX_LIKE
     #include <unistd.h>
 #endif
@@ -37,11 +19,9 @@ static std::array<const std::string, 15> gameargs{"r", "-r", "rock", "-rock", "-
                                                   "s", "-s", "scissor", "-scissor", "--scissor"};
 int main(int argc, char const *argv[])
 {
-    #ifdef WINDOWS32
+    #if defined(WINDOWS32) || defined(WINDOWS64)
     std::srand(GetCurrentProcessId());
-    #elif WINDOWS64
-    std::srand(GetCurrentProcessId());
-    #elif UNIX_LIKE
+    #elif defined(UNIX_LIKE)
     std::srand(getpid());
     #endif
     std::vector<std::string> cmdargs;
