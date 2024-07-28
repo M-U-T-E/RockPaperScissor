@@ -29,11 +29,11 @@ jobs:
       - name: Setup NSIS
         run: |
           git clone https://github.com/M-U-T-E/NSIS-LargeString-build.git
-          Expand-Archive -Path NSIS.zip -DestinationPath NSIS
-          $env:nsis = 'nsis/Bin'
-          cd NSIS
+          Expand-Archive NSIS.zip -DestinationPath NSIS
+          $env:nsis = 'NSIS/NSIS/Bin'
+          cd NSIS/NSIS
           ls
-          cd ..
+          cd ../..
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
