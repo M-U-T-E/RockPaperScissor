@@ -5,7 +5,7 @@
 #include <array>
 #include <algorithm>
 #include <ctime>
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(__MINGW32__) || defined(__MINGW32__)
     #define WINDOWS
     #include <windows.h>
 #elif defined(__linux__) || defined(__unix) || defined(__unix__)  || defined(__APPLE__) || defined(__MACH__) || defined(__FreeBSD__)
@@ -19,7 +19,7 @@ static std::array<const std::string, 15> gameargs{"r", "-r", "rock", "-rock", "-
                                                   "s", "-s", "scissor", "-scissor", "--scissor"};
 int main(int argc, char const *argv[])
 {
-    #if defined(WINDOWS32) || defined(WINDOWS64)
+    #if defined(WINDOWS32) || defined(WINDOWS64) || defined(MINGW_SDK_INIT)
     std::srand(GetCurrentProcessId());
     #elif defined(UNIX_LIKE)
     std::srand(getpid());
