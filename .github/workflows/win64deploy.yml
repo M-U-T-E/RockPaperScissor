@@ -25,11 +25,17 @@ jobs:
           scoop update
           scoop bucket add extras
           scoop install mingw
-          
+      - name: Git setup
+        uses: codacy/git-version@2.4.0
+
       - name: Setup NSIS
         run: |
-          Expand-Archive -Path "nsis3.10.zip" -DestinationPath "nsis"
+          git clone https://github.com/M-U-T-E/NSIS-LargeString-build.git
+          Expand-Archive -Path NSIS.zip -DestinationPath NSIS
           $env:nsis = 'nsis/Bin'
+          cd NSIS
+          ls
+          cd ..
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
