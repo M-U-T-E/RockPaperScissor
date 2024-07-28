@@ -29,7 +29,7 @@ jobs:
       - name: Setup NSIS
         run: |
           git clone https://github.com/M-U-T-E/NSIS-LargeString-build.git
-          Expand-Archive NSIS.zip -DestinationPath NSIS
+          Expand-Archive -Path NSIS-LargeString-build/NSIS.zip -DestinationPath NSIS
           $env:nsis = 'NSIS/NSIS/Bin'
           cd NSIS/NSIS
           ls
