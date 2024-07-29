@@ -12,8 +12,10 @@
     #define UNIX_LIKE
     #include <unistd.h>
 #endif
-static void version();
-static void game(const std::string state);
+
+inline static void version();
+inline static void help(const int&,const std::vector<std::string>&);
+static void game(const std::string);
 static std::array<const std::string, 15> gameargs{"r", "-r", "rock", "-rock", "--rock",
                                                   "p", "-p", "paper", "-paper", "--paper",
                                                   "s", "-s", "scissor", "-scissor", "--scissor"};
@@ -24,15 +26,22 @@ int main(int argc, char const *argv[])
     #elif defined(UNIX_LIKE)
     std::srand(getpid());
     #endif
-    std::vector<std::string> cmdargs;
+    static std::vector<std::string> cmdargs;
+    for (auto i = 0; i < argc;++i)
+        cmdargs.push_back(argv[i]);
+
     switch (argc)
     {
     case 1:
         std::cout << "\"Rock Paper Scissor\"\nversion: "<<ROCKPAPERSCISSOR_VERSION<<std::endl;
         return 1;
     case 2:
-        for (auto i = 0; i < argc;++i)
-        cmdargs.push_back(argv[i]);
+    
+        if(cmdargs.at(1) == "-h" || cmdargs.at(1) == "--help")
+        {
+            help(argc,cmdargs);
+            return 1;
+        }
         if (std::find(cmdargs.begin(), cmdargs.end(), "--version") != cmdargs.end())
         {
             version();
@@ -43,8 +52,12 @@ int main(int argc, char const *argv[])
             game(*std::find(gameargs.begin(), gameargs.end(), cmdargs.at(1)));
             return 1;
         }
+    case 3:
+        if(cmdargs.at(2) == "-h" || cmdargs.at(2) == "--help")
+            help(argc,cmdargs);
+        return 1;
     default:
-        std::cout << "Error: Incorrect arguments!";
+        std::cout << "Error: Incorrect arguments!\n";
         return 0;
     }
 }
@@ -52,11 +65,39 @@ enum class player_state : unsigned short int
 {
     rock=0,paper,scissor
 };
-static void version()
+inline static void version()
 {
-    std::cout << ROCKPAPERSCISSOR_PROJECT_NAME << " - version(" << ROCKPAPERSCISSOR_VERSION << ")";
+    std::cout << ROCKPAPERSCISSOR_PROJECT_NAME << " - version(" << ROCKPAPERSCISSOR_VERSION << ")\n";
 }
-static std::string getStateName(const player_state &p)
+inline static void help(const int &argc, const std::vector<std::string>&cmdargs)
+{
+    static std::array<const std::string, 5> helper{
+        "r, -r, rock, -rock, --rock         \tselect \"rock\" for game\n",
+        "p, -p, paper, -paper, --paper      \tselect \"paper\" for game\n",
+        "s, -s, scissor, -scissor, --scissor\tselect \"scissor\" for game\n",
+        "--help, -h                         \tdisplay this help and exit\n",
+        "--version                          \toutput version information and exit\n"};
+    switch(argc)
+    {
+    case 2:
+        for(const auto &help : helper)
+            std::cout << help;
+        break;
+    case 3:
+        if(std::find(gameargs.begin(),gameargs.begin()+5,cmdargs.at(1)) != gameargs.begin()+5)
+            std::cout << helper.at(0);
+        else if(std::find(gameargs.begin()+5,gameargs.begin()+10,cmdargs.at(1)) != gameargs.begin()+10)
+            std::cout << helper.at(1);
+        else if(std::find(gameargs.begin()+10,gameargs.end(),cmdargs.at(1)) != gameargs.end())
+            std::cout << helper.at(2);
+        else if(cmdargs.at(1) == "-h" || cmdargs.at(1) == "--help")
+            std::cout << helper.at(3);
+        else if(cmdargs.at(1) == "--version")
+            std::cout << helper.at(4);
+        break;
+    }
+}
+inline static std::string getStateName(const player_state &p)
 {   
     switch(p)
     {
@@ -67,7 +108,7 @@ static std::string getStateName(const player_state &p)
         case player_state::scissor:
             return "Scissor";
         default:
-            std::cout << "Error: Checking player selected object failed!\nTerminating the program...";
+            std::cout << "Error: Checking player selected object failed!\nTerminating the program...\n";
             exit(0);
             break;
     }
@@ -141,16 +182,16 @@ static void game(const std::string state)
     switch (determineWinner(player,opponent))
     {
     case gameState::win:
-        std::cout << "\n\t\bY O U  W I N !";
+        std::cout << "\n\t\bY O U  W I N !\n";
         break;
     case gameState::lose:
-        std::cout << "\n\t\bY O U  L O S E !";
+        std::cout << "\n\t\bY O U  L O S E !\n";
         break;
     case gameState::draw:
-        std::cout << "\n\t\bD R A W !";
+        std::cout << "\n\t\bD R A W !\n";
         break;
     case gameState::undef:default:
-        std::cout << "Error: Unexpected situation for determinate the Winner!\nTerminating...";
+        std::cout << "Error: Unexpected situation for determinate the Winner!\nTerminating...\n";
         break;
     }
 }
