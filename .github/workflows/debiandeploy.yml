@@ -23,16 +23,9 @@ jobs:
         with:
           cmake-version: '3.22'
         
-      - name: configure
+      - name: build and package
         run: |
-          cmake -S . -B build  -G "Unix Makefiles" -DCPACK_LINUX_GEN_NAME=DEB
-          
-      - name: build
-        run: |
-          cmake --build build --config Release
-          cd build
-          cpack -C Release
-          cd ..
+          make pkgdeb
 
       - name: report build dir
         run: |
