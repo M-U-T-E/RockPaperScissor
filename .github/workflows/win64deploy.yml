@@ -38,11 +38,11 @@ jobs:
         
       - name: configure
         run: |
-          cmake -S . -B build  -G "MinGW Makefiles"
+          cmake -S . -B build  -G "MinGW Makefiles" -DCPACK_LINUX_GEN_NAME=NSIS
           
       - name: build
         run: |
-          cmake --build build --config Release
+          cmake --build build --config Release -DCPACK_LINUX_GEN_NAME=NSIS
           cd build
           cpack -C Release
           cd ..
