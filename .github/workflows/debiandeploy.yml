@@ -29,7 +29,7 @@ jobs:
           
       - name: build
         run: |
-          cmake --build build --config Release -DCPACK_LINUX_GEN_NAME=DEB
+          cmake --build build --config Release
           cd build
           cpack -C Release
           cd ..
