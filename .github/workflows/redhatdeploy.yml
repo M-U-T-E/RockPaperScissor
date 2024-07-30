@@ -1,4 +1,4 @@
-name: ubuntu build
+name: redhat build
 
 on:
   push:
