@@ -47,6 +47,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
-          file: build/rockpaperscissor_${{ github.ref_name }}_Linux.rpm
+          file: build/rockpaperscissor-${{ github.ref_name }}-Linux.rpm
           asset_name: RockPaperScissor-${{ github.ref_name }}-${{ matrix.os }}.rpm
           prerelease: true
