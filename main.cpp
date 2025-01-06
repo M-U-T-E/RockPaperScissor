@@ -156,7 +156,7 @@ static const gameState determineWinner(const player_state &p1,const player_state
         case player_state::paper:
             return gameState::win;
         case player_state::scissor:
-            return gameState::lose;
+            return gameState::draw;
         default:
             return gameState::undef;
         }
