@@ -23,8 +23,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Install MinGW
-        uses: egor-tensin/setup-mingw@v2
+      - name: Setup MinGW
+        run: |
+          iwr -useb get.scoop.sh -outfile 'install.ps1'
+          .\install.ps1 -RunAsAdmin
+          scoop update
+          scoop bucket add extras
+          scoop install mingw
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
