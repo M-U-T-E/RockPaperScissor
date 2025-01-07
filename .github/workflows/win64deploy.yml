@@ -26,10 +26,8 @@ jobs:
           scoop bucket add extras
           scoop install mingw
           
-      - name: Setup NSIS
-        run: |
-          Expand-Archive -Path "nsis3.10.zip" -DestinationPath "nsis"
-          $env:nsis = 'nsis/Bin'
+      - name: Install NSIS
+        uses: repolevedavaj/install-nsis@v1.0.2
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
