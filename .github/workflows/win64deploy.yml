@@ -15,6 +15,9 @@ jobs:
           - amd64
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install NSIS
+        uses: repolevedavaj/install-nsis@v1.0.2
+        
       - name: Checkout repository
         uses: actions/checkout@v4
         
@@ -25,9 +28,6 @@ jobs:
           scoop update
           scoop bucket add extras
           scoop install mingw
-          
-      - name: Install NSIS
-        uses: repolevedavaj/install-nsis@v1.0.2
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
