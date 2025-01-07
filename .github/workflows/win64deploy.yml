@@ -23,13 +23,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Setup MinGW
-        run: |
-          iwr -useb get.scoop.sh -outfile 'install.ps1'
-          .\install.ps1 -RunAsAdmin
-          scoop update
-          scoop bucket add extras
-          scoop install mingw
+      - name: Install MinGW
+        uses: egor-tensin/setup-mingw@v2
           
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v2
@@ -52,6 +47,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}     
-          file: build/rpsg-${{ github.ref_name }}-win64.exe
+          file: build/RockPaperScissor-${{ github.ref_name }}-win64.exe
           asset_name: RockPaperScissor-${{ github.ref_name }}-${{ matrix.os }}.exe
           prerelease: true
