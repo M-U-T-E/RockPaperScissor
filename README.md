@@ -69,7 +69,7 @@ These instructions are for developers who want to compile the game from the sour
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/M-U-T-E/RockPaperScissor.git](https://github.com/M-U-T-E/RockPaperScissor.git)
+    git clone https://github.com/M-U-T-E/RockPaperScissor.git
     cd RockPaperScissor
     ```
 
@@ -89,7 +89,7 @@ These instructions are for developers who want to compile the game from the sour
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/M-U-T-E/RockPaperScissor.git](https://github.com/M-U-T-E/RockPaperScissor.git)
+    git clone https://github.com/M-U-T-E/RockPaperScissor.git
     cd RockPaperScissor
     ```
 
